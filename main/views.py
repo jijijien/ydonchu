@@ -4,7 +4,9 @@ from django.contrib.auth.models import User
 from talk.models import Question
 from django.db.models import Count
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='common:login')
 def index(request):
     
     username = request.user.username
