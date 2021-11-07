@@ -68,7 +68,7 @@
             
             <center>
                 <div style="padding-left: 10px; padding-bottom: 20px;">
-                    <p style="font-family: 'GowunDodum-Regular';">10/500 until Green Level</p>
+                    <p style="font-family: 'GowunDodum-Regular';">53/100 until Green Level</p>
                     <img src="{% static 'mainem/bar.png' %}" alt="My Image" width=80% >
                     
                 </div>
@@ -108,10 +108,9 @@
                 {% for question in question_list %}
                 <tr class="text-center">
                     <td>
-                        {% if question.voter.all.count > 0 %}
+                        {% if question.voter.all.count >= 0 %}
                         <span > ❤ {{ question.voter.all.count }} ㅣ {{ question.author.username }}</span>
-                        {% endif %}
-                        <span > {{ question.author.username }}</span>
+                        
                     </td>
                     <td class="text-center">
                         <a href="{% url 'talk:detail' question.id %}" style="color: black;">{{ question.subject }}</a>
