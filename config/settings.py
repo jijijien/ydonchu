@@ -45,6 +45,11 @@ INSTALLED_APPS = [
     'pybo.apps.PyboConfig',
     'django.contrib.sites',
     'common.apps.CommonConfig' 
+    'allauth',
+    'allauth.account', 
+    'allauth.socialaccount', 
+    'allauth.socialaccount.providers.naver',
+    'common.apps.CommonConfig' 
 ]
 
 AUTHENTICATION_BACKENDS = [
