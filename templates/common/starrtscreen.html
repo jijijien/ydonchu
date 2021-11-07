@@ -12,6 +12,12 @@
         <link rel="stylesheet" type="text/css" href="{% static 'mainstyle.css' %}">
     </head>
     <style>
+        @font-face {
+        font-family: 'GowunDodum-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+        }
         @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
 
         .preserve-3d {
@@ -153,6 +159,13 @@
                         <div>LOGIN</div>
                         <div></div>
                         <div onclick="location.href='{% url 'common:login' %}'">LOGIN </div>
+                    
+                    </div>
+                    <div class="button_base b03_skewed_slide_in">
+                        
+                        <div  style="font-family: 'GowunDodum-Regular';">소통</div>
+                        <div></div>
+                        <div onclick="location.href='{% url 'talk:index' %}'" style="font-family: 'GowunDodum-Regular';">소통 </div>
                     
                     </div>
                 </div>
