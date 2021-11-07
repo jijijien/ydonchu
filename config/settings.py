@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['15.165.186.26']
 # Application definition
 
 INSTALLED_APPS = [
+    'common.apps.CommonConfig',
     'cal.apps.CalConfig',
     'talk.apps.TalkConfig',
     'king.apps.KingConfig',
