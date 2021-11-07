@@ -1,0 +1,201 @@
+{% extends 'cal/base.html' %}
+
+{% block content %}
+{% load static %}
+    <div class="container">
+<style>
+
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+h1 {
+    text-align : center;
+    font-family: 'GowunDodum-Regular';
+}
+
+.calendar{
+    font-size: 0.9rem;
+    margin : auto;
+	background: #fff;
+	border-radius: 0 0 1em 1em;
+    text-align : center;
+}
+
+.month {
+    font-size: 0.5rem;
+}
+  
+.date {
+    font-size: 1rem;
+    font-family: 'GowunDodum-Regular';
+}
+
+.calendar .month {
+    color : #222222;
+    font-weight: 700;
+}
+
+.calendar th {
+    padding: 2vw;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: 'GowunDodum-Regular';
+}
+
+.calendar tr {
+	color: #454166;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.calendar td {
+    width: 3.0em;
+    height: 3.0em;
+    padding: .25em .25em;
+    transition: background .5s;
+  }
+  
+
+.calendar td:hover {
+	background: #cacaca;
+	color: #fff;
+}
+
+.event_line {
+    height: 100%;
+    padding: 0;
+    list-style: none;
+    margin : 0;
+}
+  
+a {
+    transition: color .2s;
+}
+
+span {
+    color : black;
+}
+
+a:link { color: blue; text-decoration: none;}
+a:visited { color: blue; text-decoration: none;}
+a:hover { color: red; text-decoration: none;}
+
+.left {
+    float : left;
+    margin : 10px;
+}
+    
+.right {
+    float : right;
+    margin : 10px;
+}
+
+.form {
+    margin: auto;
+}
+  
+  .form input, .form select, .form textarea {
+    border-radius: 5px;
+    border: 1px solid #17a2b8;
+    outline: none;
+    background: none;
+    padding: 5px;
+    width: 100%;
+}
+
+footer {
+
+    position:fixed; 
+    width:100%; 
+    left:0; 
+    top:0;  
+    height:80px; 
+    bottom:0; 
+    top:auto;
+    text-align:center;
+    
+}
+
+
+nav {color:#003777}
+
+element.style {
+    visibility: visible;
+}
+.sch_home_shortcut .shs_item {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    
+}
+
+.sch_home_shortcut{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
+
+.flick-container {
+    overflow: hidden;
+    position: relative;
+    
+}
+
+.sch_home_shortcut .shs_text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -.55px;
+    color: #1e1e23;
+}
+body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    clear: both;
+}
+
+
+html, body { 
+    margin:0; 
+    padding:0; 
+    height:100% 
+ } 
+
+.content { 
+    position:absolute; 
+    top:70px; 
+    bottom:80px; 
+    width:100%; 
+    overflow:auto; 
+    text-align: center;
+ } 
+.outer{
+    width: 100%;
+}
+
+</style>
+        <br>
+        <div class="outer">
+            <a class="btn btn btn-light left" href="{% url 'cal:calendar' %}?{{ prev_month }}"><span style="font-family: 'GowunDodum-Regular';">이전 달</span> </a>
+            <a class="btn btn btn-light right" href="{% url 'cal:calendar' %}?{{ next_month }}"><span style="font-family: 'GowunDodum-Regular'">다음 달</span> </a>
+        </div>
+        <div >
+            {{zz}}
+        </div>
+        <h8 style="font-family:'GowunDodum-Regular'">이번 달 용기내: {{how_my}}번</h8>
+    </div>
+{% endblock %}

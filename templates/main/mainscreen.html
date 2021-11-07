@@ -1,0 +1,208 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+<html>
+    <head>
+        <title>Y-돈츄</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+        <!-- pybo CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'mainstyle.css' %}">
+    </head>
+    <style>
+        @font-face {
+            font-family: 'GowunDodum-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+    </style>
+    <body>
+        <!-- 네비게이션바 -->
+        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #1335a3; z-index: 2">
+            <a class="navbar-brand" href="{% url 'screen' %}"style="font-family: 'GowunDodum-Regular';">Y-돈츄</a>
+            <h5 style="font-family:'GowunDodum-Regular';color: white;"> ㅣ{{ user.username }}</h1>
+            <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-0" id="navbarNav" >
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        {% if user.is_authenticated %}
+                        <a class="nav-link" href="{% url 'common:logout' %}"> (로그아웃)</a>
+                        {% else %}
+                        <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            
+        </nav>
+        
+
+
+        <div class="content" style="z-index: 1; padding: 5px;">
+            <div class="name" style="z-index: 1;">
+            <style>
+                .name {
+                    border: 3px solid #80ABEF;
+                    padding-top: 10px;
+                    margin: 10px;
+                    margin-top: 0px;
+                    width: 95%;
+                }
+
+            </style>
+            
+            <ul class="point" style="z-index: 1;">
+                <li>MY POINT: {{ people.point }}P</li>
+                <p></p>
+                <li>용기낸 횟수: {{ people.how_many }}회</li>
+                <p></p>
+            </ul>
+            <p></p>
+            
+            <center>
+                <div style="padding-left: 10px; padding-bottom: 20px;">
+                    <p style="font-family: 'GowunDodum-Regular';">10/500 until Green Level</p>
+                    <img src="{% static 'mainem/bar.png' %}" alt="My Image" width=80% >
+                    
+                </div>
+                
+                
+                <p></p>
+                <img src="{% static 'mainem/qr.png' %}" alt="My Image" width=50% style="max-width: 200px; height: auto;">
+            </center>
+            
+            <style>
+                ul li {
+                    list-style-type: none; 
+                    float: left;
+                    padding-left: 10px;
+                    color: #797979;
+                    font-family:  'GowunDodum-Regular';
+                }
+                ul {display: inline-block;}
+                .ma {
+                margin: 10px;
+                margin-top: 0px;
+                width: 95%;
+                }
+                
+            </style>
+
+        
+        
+        
+        </div>
+        <div class="ma"  >
+            
+            <h3 class="border-bottom py-2" style="font-family:'GowunDodum-Regular'">Best 게시물</h3>
+            <table class="table table-hover" style="font-family:'GowunDodum-Regular'">
+                <tbody style="font-family:'GowunDodum-Regular'">
+                {% if question_list %}
+                {% for question in question_list %}
+                <tr class="text-center">
+                    <td>
+                        {% if question.voter.all.count > 0 %}
+                        <span > ❤ {{ question.voter.all.count }} ㅣ {{ question.author.username }}</span>
+                        {% endif %}
+                        <span > {{ question.author.username }}</span>
+                    </td>
+                    <td class="text-center">
+                        <a href="{% url 'talk:detail' question.id %}" style="color: black;">{{ question.subject }}</a>
+                        {% if question.answer_set.count > 0 %}
+                        <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
+                        {% endif %}
+                    </td>
+                    <td></td>  <!-- 글쓴이 추가 -->
+                    <td style="font-size: smaller;">{{ question.create_date }}</td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                    <td colspan="3">질문이 없습니다.</td>
+                </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+
+
+
+
+
+        </div>
+        </div>
+        
+        <footer>
+                    
+            <div class="sch_home_shortcut" id="HOME_SHORTCUT"style="border-top:1px solid rgb(168, 168, 168);">
+
+                <div class="shs_item">
+                    <a href="{% url 'screen' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew">
+                        <div class="shs_service_mw">
+                            <picture>
+                                <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/news_icon_88x88_dark.png">
+                                <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/home iconn.png' %}">
+                            </picture>
+                        </div>
+                        
+                    </a>
+                </div>
+                <div class="shs_item">
+                    <a href="{% url 'king' %}" class="shs_link ITEM" data-code="menu.SHOPPING" data-clk="shortsho">
+                        <div class="shs_service_mw">
+                            <picture>
+                                <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/shopping_icon_88x88_dark.png">
+                                <img width="35" height="35" alt="" class="shs_service_m ICON" src="{% static 'mainem/people iconn.png' %}">
+                            </picture>
+                        </div>
+                        
+                    </a>
+                </div>
+                <div class="shs_item">
+                    <a href="{% url 'cal:calendar' %}" class="shs_link ITEM" data-code="menu.DATA" data-clk="shortdat">
+                        <div class="shs_service_mw">
+                            <picture>
+                                <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/data_icon_88x88_dark.png">
+                                <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/calendar icon.png' %}">
+                            </picture>
+                        </div>
+                        
+                    </a>
+                </div>
+                <div class="shs_item">
+                    <a href="{% url 'talk:index' %}" class="shs_link ITEM" data-code="menu.ENT" data-clk="shortent">
+                        <div class="shs_service_mw">
+                            <picture>
+                                <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/ent_icon_88x88_dark.png">
+                                <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/chat iconn.png' %}">
+                            </picture>
+                        </div>
+                        
+                    </a>
+                </div>
+                <style>
+                    
+                    div {display: inline-block;}
+
+                </style>
+                
+
+            </div>
+
+
+
+        </footer>
+        <p></p>
+        <!-- jQuery JS -->
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>  
+    </body>
+</html>

@@ -1,0 +1,130 @@
+{% extends 'talk/base.html' %}
+{% load talk_filter %}
+{% block content %}
+<style>
+    @font-face {
+        font-family: 'GowunDodum-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+<div style="width: 100%; padding: 5%;">
+    <div class="row justify-content-between my-3">
+        <div class="col-3">
+            <select class="form-control so">
+                <option style="font-family:'GowunDodum-Regular'" value="recent" {% if so == 'recent' %}selected{% endif %}>최신순</option>
+                <option style="font-family:'GowunDodum-Regular'" value="recommend" {% if so == 'recommend' %}selected{% endif %}>추천순</option>
+                <option style="font-family:'GowunDodum-Regular'" value="popular" {% if so == 'popular' %}selected{% endif %}>인기순</option>
+            </select>
+        </div>
+        
+    </div>
+    <table class="table table-hover" style="font-family:'GowunDodum-Regular'">
+        <thead>
+        <tr class="text-center" >
+            <th>번호</th>
+            <th>추천</th>
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody style="font-family:'GowunDodum-Regular'">
+        {% if question_list %}
+        {% for question in question_list %}
+        <tr class="text-center">
+            <td>
+                <!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 -->
+                {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
+            </td>
+            <td>
+                {% if question.voter.all.count > 0 %}
+                <span class="badge  bg-primary px-2 py-1" style="color: white;">{{ question.voter.all.count }}</span>
+                {% endif %}
+            </td>
+            <td class="text-center">
+                <a href="{% url 'talk:detail' question.id %}" style="color: black;">{{ question.subject }}</a>
+                {% if question.answer_set.count > 0 %}
+                <span class="text-danger small ml-2">{{ question.answer_set.count }}</span>
+                {% endif %}
+            </td>
+            <td>{{ question.author.username }}</td>  <!-- 글쓴이 추가 -->
+            <td style="font-size: smaller;">{{ question.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">질문이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <!-- 페이징처리 시작 -->
+    <ul class="pagination justify-content-center">
+        <!-- 이전페이지 -->
+        {% if question_list.has_previous %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.previous_page_number }}" href="#" style="font-family: 'GowunDodum-Regular'">이전</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#" style="font-family: 'GowunDodum-Regular'">이전</a>
+        </li>
+        {% endif %}
+        <!-- 페이지리스트 -->
+        {% for page_number in question_list.paginator.page_range %}
+        {% if page_number >= question_list.number|add:-5 and page_number <= question_list.number|add:5 %}
+            {% if page_number == question_list.number %}
+            <li class="page-item active" aria-current="page" style="font-family: 'GowunDodum-Regular';border-color='black';" >
+                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" data-page="{{ page_number }}" href="#">{{ page_number }}</a>
+            </li>
+            {% endif %}
+        {% endif %}
+        {% endfor %}
+        <!-- 다음페이지 -->
+        {% if question_list.has_next %}
+        <li class="page-item">
+            <a class="page-link" data-page="{{ question_list.next_page_number }}" href="#" style="font-family: 'GowunDodum-Regular'" >다음</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" tabindex="-1" aria-disabled="true" href="#" style="font-family: 'GowunDodum-Regular'">다음</a>
+        </li>
+        {% endif %}
+    </ul>
+    <!-- 페이징처리 끝 -->
+    <a href="{% url 'talk:question_create' %}" class="btn btn-outline-secondary" style="font-family:'GowunDodum-Regular';margin-top: 20px;">글 작성하기</a>
+</div>
+<form id="searchForm" method="get" action="{% url 'talk:index' %}">
+    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
+    <input type="hidden" id="page" name="page" value="{{ page }}">
+    <input type="hidden" id="so" name="so" value="{{ so }}">
+</form>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".page-link").on('click', function() {
+        $("#page").val($(this).data("page"));
+        $("#searchForm").submit();
+    });
+
+    $("#btn_search").on('click', function() {
+        $("#kw").val($(".kw").val());
+        $("#page").val(1);  // 검색버튼을 클릭할 경우 1페이지부터 조회한다.
+        $("#searchForm").submit();
+    });
+
+    $(".so").on('change', function() {
+        $("#so").val($(this).val());
+        $("#page").val(1);
+        $("#searchForm").submit();
+    });
+});
+</script>
+{% endblock %}

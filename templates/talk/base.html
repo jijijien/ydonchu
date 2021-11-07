@@ -1,0 +1,184 @@
+{% load static %}
+<!doctype html>
+<html lang="ko">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <!-- pybo CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>Y-돈츄</title>
+</head>
+<style>
+    element.style {
+    visibility: visible;
+}
+.sch_home_shortcut .shs_item {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    
+}
+
+.sch_home_shortcut{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
+
+.flick-container {
+    overflow: hidden;
+    position: relative;
+    
+}
+
+.sch_home_shortcut .shs_text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 15px;
+    letter-spacing: -.55px;
+    color: #1e1e23;
+}
+body, button, dd, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    clear: both;
+}
+
+
+footer {
+
+    position:fixed; 
+    width:100%; 
+    left:0; 
+    top:0;  
+    height:80px; 
+    bottom:0; 
+    top:auto;
+    text-align:center;
+    
+}
+
+
+
+
+html, body { 
+    margin:0; 
+    padding:0; 
+    height:100% 
+ } 
+
+.content { 
+    position:absolute; 
+    top:70px; 
+    bottom:80px; 
+    width:100%; 
+    overflow:auto; 
+ } 
+ @font-face {
+            font-family: 'GowunDodum-Regular';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #1335a3; z-index: 2">
+        <h5 style="font-family:'GowunDodum-Regular';color: white;"> 소통</h5>
+        <h5 style="font-family:'GowunDodum-Regular';color: white;"> ㅣ{{ user.username }}</h1>
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse flex-grow-0" id="navbarNav" >
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'common:logout' %}"> (로그아웃)</a>
+                    {% else %}
+                    <a class="nav-link" href="{% url 'common:login' %}">로그인</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+        
+    </nav>
+<!-- 기본 템플릿 안에 삽입될 내용 Start -->
+<!-- 기본 템플릿 안에 삽입될 내용 End -->
+<div class="content">
+{% block content %}
+{% endblock %}
+</div>
+<footer>
+                    
+    <div class="sch_home_shortcut" id="HOME_SHORTCUT"style="border-top:1px solid rgb(168, 168, 168);">
+
+        <div class="shs_item">
+            <a href="{% url 'screen' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew">
+                <div class="shs_service_mw">
+                    <picture>
+                        <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/news_icon_88x88_dark.png">
+                        <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/home iconn.png' %}">
+                    </picture>
+                </div>
+                
+            </a>
+        </div>
+        <div class="shs_item">
+            <a href="{% url 'king' %}" class="shs_link ITEM" data-code="menu.SHOPPING" data-clk="shortsho">
+                <div class="shs_service_mw">
+                    <picture>
+                        <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/shopping_icon_88x88_dark.png">
+                        <img width="35" height="35" alt="" class="shs_service_m ICON" src="{% static 'mainem/people iconn.png' %}">
+                    </picture>
+                </div>
+                
+            </a>
+        </div>
+        <div class="shs_item">
+            <a href="{% url 'cal:calendar' %}" class="shs_link ITEM" data-code="menu.DATA" data-clk="shortdat">
+                <div class="shs_service_mw">
+                    <picture>
+                        <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/data_icon_88x88_dark.png">
+                        <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/calendar icon.png' %}">
+                    </picture>
+                </div>
+                
+            </a>
+        </div>
+        <div class="shs_item">
+            <a href="{% url 'talk:index' %}" class="shs_link ITEM" data-code="menu.ENT" data-clk="shortent">
+                <div class="shs_service_mw">
+                    <picture>
+                        <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/ent_icon_88x88_dark.png">
+                        <img width="30" height="30" alt="" class="shs_service_m ICON" src="{% static 'mainem/chat iconn.png' %}">
+                    </picture>
+                </div>
+                
+            </a>
+        </div>
+        <style>
+            
+            div {display: inline-block;}
+
+        </style>
+    </div>
+</footer>
+<script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+<script src="{% static 'bootstrap.min.js' %}"></script>
+{% block script %}
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'talk/base.html' %}
+{% block content %}
+<style>
+    @font-face {
+        font-family: 'GowunDodum-Regular';
+        src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+    }
+</style>
+<div style="width: 100%;padding-right: 10px;padding-left: 10px;">
+    <h2 class="border-bottom py-2" style="font-family:'GowunDodum-Regular'">글 작성하기</h2>
+    <form method="post" class="post-form my-3">
+        {% csrf_token %}
+        <!-- 오류표시 Start -->
+        {% if form.errors %}
+            <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+                {% if field.errors %}
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+                {% endif %}
+            {% endfor %}
+            </div>
+        {% endif %}
+<h5 class="border-bottom my-3 py-2" style="font-family:'GowunDodum-Regular';">제목</h5>
+<input type="text" class="form-control" name="subject" id="subject" value="{{ form.subject.value|default_if_none:'' }}" style="font-family:'GowunDodum-Regular'">
+<h5 class="border-bottom my-3 py-2" style="font-family:'GowunDodum-Regular';">내용</h5>
+<textarea class="form-control" name="content"
+id="content" rows="10" style=" font-family:'GowunDodum-Regular'">{{ form.content.value|default_if_none:'' }}</textarea>
+
+<input type="submit" value="글 등록" class="btn bnt-lg btn-outline-secondary" style="font-family:'GowunDodum-Regular';margin-top: 20px;" >
+
+    </form>
+</div>
+{% endblock %}
