@@ -44,10 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pybo.apps.PyboConfig',
     'django.contrib.sites',
-    'allauth',
-    'allauth.account', 
-    'allauth.socialaccount', 
-    'allauth.socialaccount.providers.naver',
     'common.apps.CommonConfig' 
 ]
 
