@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ['15.165.186.26']
 # Application definition
 
 INSTALLED_APPS = [
-    'common.apps.CommonConfig',
     'cal.apps.CalConfig',
     'talk.apps.TalkConfig',
     'king.apps.KingConfig',
@@ -45,12 +44,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pybo.apps.PyboConfig',
     'django.contrib.sites',
-    'common.apps.CommonConfig' 
+    'common.apps.CommonConfig',
     'allauth',
     'allauth.account', 
     'allauth.socialaccount', 
     'allauth.socialaccount.providers.naver',
-    'common.apps.CommonConfig' 
+    'common.apps.CommonConfig' ,
 ]
 
 AUTHENTICATION_BACKENDS = [
