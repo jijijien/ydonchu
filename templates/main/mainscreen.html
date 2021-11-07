@@ -110,7 +110,8 @@
                     <td>
                         {% if question.voter.all.count >= 0 %}
                         <span > ❤ {{ question.voter.all.count }} ㅣ {{ question.author.username }}</span>
-                        
+                        {% endif %}
+                        <span ></span>
                     </td>
                     <td class="text-center">
                         <a href="{% url 'talk:detail' question.id %}" style="color: black;">{{ question.subject }}</a>
