@@ -130,8 +130,6 @@ html, body {
         <div class="shs_item">
             {% if user.is_authenticated %}
             <a href="{% url 'screen' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew">
-            {% else %}
-            <a href="{% url 'common:login' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew"></a>
             {% endif %}
                 <div class="shs_service_mw">
                     <picture>
@@ -154,7 +152,10 @@ html, body {
             </a>
         </div>
         <div class="shs_item">
+            {% if user.is_authenticated %}
             <a href="{% url 'cal:calendar' %}" class="shs_link ITEM" data-code="menu.DATA" data-clk="shortdat">
+            {% endif %}
+            
                 <div class="shs_service_mw">
                     <picture>
                         <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/data_icon_88x88_dark.png">
