@@ -10,7 +10,6 @@ from common.models import What_food, People
 from random import randint
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='common:login')
 def calendar_view(request):
     
     today = get_date(request.GET.get('month'))
