@@ -130,6 +130,8 @@ html, body {
         <div class="shs_item">
             {% if user.is_authenticated %}
             <a href="{% url 'screen' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew">
+            {% else %}
+            <a href="{% url 'common:login' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew"></a>
             {% endif %}
                 <div class="shs_service_mw">
                     <picture>
