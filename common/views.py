@@ -19,7 +19,7 @@ def signup(request):
             # 사용자 인증
             login(request, usere )  # 로그인
             
-            return redirect('main:screen')
+            return redirect('screen')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
