@@ -17,9 +17,9 @@ def signup(request):
             p=People(name=str(username))
             p.save()
             # 사용자 인증
-            login(request, user)  # 로그인
+            login(request, user ,backend='django.contrib.auth.backends.ModelBackend')  # 로그인
             
-            return redirect('screen')
+            return redirect('main:screen')
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
