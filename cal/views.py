@@ -29,7 +29,7 @@ def calendar_view(request):
     #month=What_food.objects.filter(month=todayy.month)
     
     a=What_food.objects.filter(who=pe)
-    how_my=a.count()
+    how_my=a.filter(month=todayy.month).count()
     date_list=[]
     for item in a:
         if item.date not in date_list:
