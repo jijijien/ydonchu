@@ -128,7 +128,9 @@ html, body {
     <div class="sch_home_shortcut" id="HOME_SHORTCUT"style="border-top:1px solid rgb(168, 168, 168);">
 
         <div class="shs_item">
+            {% if user.is_authenticated %}
             <a href="{% url 'screen' %}" class="shs_link ITEM" data-code="menu.NEWS" data-clk="shortnew">
+            {% endif %}
                 <div class="shs_service_mw">
                     <picture>
                         <source media="false" class="ICON_DARK" srcset="https://s.pstatic.net/static/www/mobile/up/service/menu/20210614/news_icon_88x88_dark.png">
