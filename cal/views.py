@@ -26,9 +26,9 @@ def calendar_view(request):
 
 
     todayy=timezone.localtime()
-    month=What_food.objects.filter(month=todayy.month)
+    #month=What_food.objects.filter(month=todayy.month)
     
-    a=month.filter(who=pe)
+    a=What_food.objects.filter(who=pe)
     how_my=a.count()
     date_list=[]
     for item in a:
