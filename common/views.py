@@ -11,13 +11,13 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():
             form.save()
-            username = form.cleaned_data.get('username')
+            usernamed = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)  
-            p=People(name=str(username))
+            usere = authenticate(username=usernamed, password=raw_password)  
+            p=People(name=str(usernamed))
             p.save()
             # 사용자 인증
-            login(request, user ,backend='django.contrib.auth.backends.ModelBackend')  # 로그인
+            login(request, usere )  # 로그인
             
             return redirect('main:screen')
     else:
